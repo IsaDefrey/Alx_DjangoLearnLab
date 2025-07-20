@@ -4,6 +4,7 @@ from .models import Book
 from .models import Library
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
@@ -24,6 +25,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            login(request, user)
             return redirect('login')  # Redirect to login after successful registration
     else:
         form = UserCreationForm()
