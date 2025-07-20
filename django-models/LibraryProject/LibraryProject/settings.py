@@ -100,6 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'  # Redirect after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
+
+# Optional for serving CSS in dev
+STATIC_URL = 'static/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
