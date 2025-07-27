@@ -23,3 +23,36 @@ Limited external resource loading to trusted domains (e.g., Google Fonts).
 Documented and commented security practices across settings and views.
 
 Manually tested for XSS and CSRF vulnerabilities using crafted payloads.
+
+# Django HTTPS & Security Settings Review
+
+## Configured Security Settings (in settings.py)
+
+- `SECURE_SSL_REDIRECT = True`: Ensures all HTTP traffic is redirected to HTTPS.
+- `SECURE_HSTS_SECONDS = 31536000`: Enables HSTS to enforce HTTPS use by clients.
+- `SECURE_HSTS_INCLUDE_SUBDOMAINS = True`: Extends HSTS to all subdomains.
+- `SECURE_HSTS_PRELOAD = True`: Allows submission to browser preload lists.
+- `SESSION_COOKIE_SECURE = True`: Prevents session hijacking over HTTP.
+- `CSRF_COOKIE_SECURE = True`: Prevents CSRF tokens from being transmitted insecurely.
+- `X_FRAME_OPTIONS = 'DENY'`: Prevents clickjacking.
+- `SECURE_CONTENT_TYPE_NOSNIFF = True`: Prevents MIME-type sniffing attacks.
+- `SECURE_BROWSER_XSS_FILTER = True`: Enables built-in browser protection for XSS.
+
+## Deployment Notes
+
+- Nginx is configured to redirect HTTP to HTTPS.
+- SSL certificates from Let's Encrypt installed.
+- Django is running behind a reverse proxy (Nginx) forwarding HTTPS requests to `gunicorn`.
+
+## Manual Testing Summary
+
+- ✅ Site enforces HTTPS
+- ✅ Forms protected against CSRF over HTTPS
+- ✅ Browser blocks insecure iframe embedding
+- ✅ Network traffic inspected and confirmed to use HTTPS only
+
+## Recommendations
+
+- Automate SSL renewal (e.g., via Certbot cron job)
+- Integrate automated security scanning tools
+- Add CSP (already done via `django-csp`)

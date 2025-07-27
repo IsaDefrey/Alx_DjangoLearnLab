@@ -165,3 +165,28 @@ CONTENT_SECURITY_POLICY = {
     # Uncomment below to test in report-only mode (logs but doesn’t block)
     # 'REPORT_ONLY': True,
 }
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True  # ⛑️ Enforces HTTPS across the site
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # ⛑️ Force HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # ⛑️ Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # ⛑️ Allow your domain to be preloaded in browser HSTS lists
+
+# ⛑️ Ensure session cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True
+
+# ⛑️ Ensure CSRF protection cookie is only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+
+
+# ⛑️ Prevent clickjacking by denying iframe embedding
+X_FRAME_OPTIONS = "DENY"
+
+# ⛑️ Prevent content-type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# ⛑️ Enable XSS filter in modern browsers
+SECURE_BROWSER_XSS_FILTER = True
+
