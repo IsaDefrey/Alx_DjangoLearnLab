@@ -40,6 +40,10 @@ def book_delete(request, pk):
         return redirect('book_list')
     return render(request, 'bookshelf/book_confirm_delete.html', {'book': book})
 
+def book_list_view(request):
+    books = Book.objects.all()
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
 def example_form_view(request):
     form = ExampleForm()
     return render(request, 'form_example.html', {'form': form})
