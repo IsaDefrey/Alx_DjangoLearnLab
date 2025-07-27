@@ -16,3 +16,6 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ['title', 'author']
 
+class ExampleForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()

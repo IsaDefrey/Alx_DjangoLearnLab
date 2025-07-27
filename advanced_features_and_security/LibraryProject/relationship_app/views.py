@@ -11,7 +11,8 @@ from .models import UserProfile
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
-from .forms import BookForm 
+from .forms import BookForm
+from .forms import ExampleForm
 
 # ✅ Function-based view to list all books (exact match for checks)
 def list_books(request):
@@ -94,3 +95,7 @@ def delete_book(request, book_id):
         book.delete()
         return redirect("home")
     return render(request, "relationship_app/book_confirm_delete.html", {"book": book})
+
+def example_form_view(request):
+    form = ExampleForm()
+    return render(request, 'form_example.html', {'form': form})
