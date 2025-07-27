@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head><title>Delete Book</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Book</title>
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+</head>
 <body>
-<h2>Are you sure you want to delete "{{ book }}"?</h2>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-    <a href="{% url 'home' %}">Cancel</a>
-</form>
+    <h2>Are you sure you want to delete "{{ book }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'home' %}">Cancel</a>
+    </form>
 </body>
 </html>

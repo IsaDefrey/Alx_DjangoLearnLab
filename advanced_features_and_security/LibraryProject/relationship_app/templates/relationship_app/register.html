@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+
+    <!-- Load CSS securely from Django static files -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <h1>Register</h1>
+    
+    <!-- CSRF token for protection against cross-site request forgery -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -14,3 +23,4 @@
     </form>
 </body>
 </html>
+

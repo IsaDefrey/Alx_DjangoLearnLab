@@ -3,15 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
+    <!-- This line links to your custom stylesheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <h1>Login</h1>
+
+    <!-- The login form uses POST method for secure data submission -->
     <form method="post">
         {% csrf_token %}
+        <!-- 
+            {% csrf_token %} is CRITICAL for CSRF protection.
+            It ensures that the form can only be submitted by your site's users,
+            protecting against malicious external requests.
+        -->
+
+        <!-- Render Django form fields nicely with <p> tags -->
         {{ form.as_p }}
+
+        <!-- Submit button -->
         <button type="submit">Login</button>
     </form>
+
+    <!-- Link to the registration page -->
     <a href="{% url 'register' %}">Register</a>
 </body>
 </html>

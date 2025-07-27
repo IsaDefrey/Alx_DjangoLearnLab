@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Library Detail</title>
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
 </head>
 <body>
     <h1>Library: {{ library.name }}</h1>
@@ -15,3 +20,4 @@
     </ul>
 </body>
 </html>
+

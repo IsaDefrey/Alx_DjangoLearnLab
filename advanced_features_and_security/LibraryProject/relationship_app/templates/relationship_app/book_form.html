@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head><title>{{ action }} Book</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ action }} Book</title>
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+</head>
 <body>
-<h2>{{ action }} Book</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{{ action }} Book</button>
-</form>
-<a href="{% url 'home' %}">Back to Home</a>
+    <h2>{{ action }} Book</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{{ action }} Book</button>
+    </form>
+    <a href="{% url 'home' %}">Back to Home</a>
 </body>
 </html>
+

@@ -1,6 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head><title>Member Dashboard</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Dashboard</title>
+
+    <!-- Prevent MIME-type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- Prevent the page from being embedded in an iframe (clickjacking protection) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <!-- Basic Content Security Policy to reduce XSS risks -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+
+    <!-- Optional: link to stylesheet (served securely from your static directory) -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
 <body>
     <h1>Welcome, Member!</h1>
     <p>You can view your books and borrow history.</p>

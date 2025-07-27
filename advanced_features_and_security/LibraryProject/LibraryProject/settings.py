@@ -23,9 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-omls@c884@irvi_6j0pa@)q7%!r&ul#d%&)h6353j6tm$*!ol!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+# Prevent browser from MIME-sniffing the response
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable browser's built-in XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevent the site from being framed (clickjacking protection)
+X_FRAME_OPTIONS = 'DENY'
+
+# Ensure cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
@@ -38,7 +51,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookshelf",  
-    "relationship_app" # Add your app here
+    "relationship_app",
+    "csp",  # Content Security Policy middleware
 ]
 
 MIDDLEWARE = [
@@ -49,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "csp.middleware.CSPMiddleware", # CSP Middleware to inject Content Security Policy headers
 ]
 
 ROOT_URLCONF = "LibraryProject.urls"
@@ -130,3 +145,23 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ------------------------
+# CONTENT SECURITY POLICY
+# ------------------------
+# Enforces a strict Content Security Policy to mitigate XSS and data injection attacks.
+# Compatible with django-csp >= 4.0
+
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': ("'self'",),
+        'script-src': ("'self'",),
+        'style-src': ("'self'", 'https://fonts.googleapis.com'),
+        'font-src': ("'self'", 'https://fonts.gstatic.com'),
+        'img-src': ("'self'", 'data:'),
+        'connect-src': ("'self'",),
+        # 'report-uri': ('/csp-violation-report/',),  # Optional reporting endpoint
+    },
+    # Uncomment below to test in report-only mode (logs but doesn’t block)
+    # 'REPORT_ONLY': True,
+}

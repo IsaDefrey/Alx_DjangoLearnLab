@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Logout</title>
+
+    <!-- Add this to make sure the browser doesn’t try to guess the content type -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- Prevent clickjacking by disallowing the page to be embedded in an iframe -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <!-- Content Security Policy to restrict where resources can load from -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+
+    <!-- Optional: Link to your stylesheet securely -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <h1>You have been logged out</h1>
+
+    <!-- Safe navigation back to login -->
     <a href="{% url 'login' %}">Login again</a>
 </body>
 </html>
